@@ -1,5 +1,6 @@
 const { resolve } = require('path')
 const webpack = require('webpack')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 module.exports = {
   context: resolve(__dirname, 'client'),
@@ -8,13 +9,18 @@ module.exports = {
     'react-hot-loader/patch',
     'webpack-dev-server/client?http://localhost:8080',
     'webpack/hot/only-dev-server',
-    './index.js'
+    'index'
   ],
 
   output: {
     filename: 'bundle.js',
     path: resolve(__dirname, 'dist'),
     publicPath: '/'
+  },
+
+  resolve: {
+    extensions: ['.js', '.jsx'],
+    modules: ['client', 'node_modules']
   },
 
   devtool: 'inline-source-map',
@@ -28,7 +34,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.jsx?$/,
         use: 'babel-loader',
         exclude: /node_modules/
       },
@@ -44,6 +50,7 @@ module.exports = {
   },
 
   plugins: [
+    new CleanWebpackPlugin(['dist']),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin()
   ]
