@@ -29,6 +29,7 @@
     "react-hot-loader": "next",
     "react-router-dom": "^4.1.1",
     "request": "^2.81.0",
+    "superagent": "^3.5.2",
     "url-loader": "^0.5.8"
   },
   "devDependencies": {
