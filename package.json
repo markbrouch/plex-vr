@@ -9,14 +9,22 @@
   "scripts": {
     "format": "prettier --single-quote true --semi false --write \"{client,server}/**/*.{js,jsx}\"",
     "build": "webpack",
-    "start": "npm run build && webpack-dev-server",
+    "hot": "webpack-dev-server",
+    "server": "node ./server",
+    "start": "npm run build && npm run server",
     "precommit": "lint-staged"
   },
   "dependencies": {
     "aframe-react": "^4.2.3",
+    "koa": "^2.2.0",
+    "koa-logger": "^2.0.1",
+    "koa-router": "next",
+    "koa-static": "^3.0.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
-    "react-hot-loader": "next"
+    "react-hot-loader": "next",
+    "request": "^2.81.0",
+    "url-loader": "^0.5.8"
   },
   "devDependencies": {
     "babel-core": "^6.24.1",

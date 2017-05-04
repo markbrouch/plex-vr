@@ -7,7 +7,7 @@ module.exports = {
 
   entry: [
     'react-hot-loader/patch',
-    'webpack-dev-server/client?http://localhost:8080',
+    'webpack-dev-server/client?http://0.0.0.0:8080',
     'webpack/hot/only-dev-server',
     'index'
   ],
@@ -26,9 +26,15 @@ module.exports = {
   devtool: 'inline-source-map',
 
   devServer: {
+    host: '0.0.0.0',
+    disableHostCheck: true,
     hot: true,
     contentBase: resolve(__dirname, 'dist'),
-    publicPath: '/'
+    publicPath: '/',
+    historyApiFallback: true,
+    proxy: {
+      '/video': 'http://0.0.0.0:8181'
+    }
   },
 
   module: {
@@ -45,6 +51,26 @@ module.exports = {
       {
         test: /\.html$/,
         use: 'file-loader?name=[path][name].[ext]'
+      },
+      {
+        test: /\.(mov|mkv)$/,
+        use: 'file-loader?name=video/[path][name].[ext]'
+      },
+      {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url-loader?limit=10000&mimetype=images/svg+xml&name=assets/[name].[ext]'
+      },
+      {
+        test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url-loader?limit=10000&mimetype=application/font-woff&name=assets/[name].[ext]'
+      },
+      {
+        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url-loader?limit=10000&mimetype=application/octet-stream&name=assets/[name].[ext]'
+      },
+      {
+        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'file-loader?name=assets/[name].[ext]'
       }
     ]
   },
