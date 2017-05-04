@@ -15,14 +15,18 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
+    "aframe": "^0.5.0",
     "aframe-react": "^4.2.3",
+    "bootstrap": "^3.3.7",
     "koa": "^2.2.0",
     "koa-logger": "^2.0.1",
     "koa-router": "next",
     "koa-static": "^3.0.0",
     "react": "^15.5.4",
+    "react-bootstrap": "^0.31.0",
     "react-dom": "^15.5.4",
     "react-hot-loader": "next",
+    "react-router-dom": "^4.1.1",
     "request": "^2.81.0",
     "url-loader": "^0.5.8"
   },
