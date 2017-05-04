@@ -1,17 +1,18 @@
 import React from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
+import glamorous from 'glamorous'
 
 import Login from 'components/login'
 import Theater from 'components/theater'
 
-import styles from './App.css'
+const { Div } = glamorous
 
 const App = () => (
   <Router>
-    <div className={styles.App}>
+    <Div width="100%" height="100%">
       <Route exact path="/" component={Login} />
       <Route path="/theater" component={Theater} />
-    </div>
+    </Div>
   </Router>
 )
 

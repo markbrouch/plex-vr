@@ -7,8 +7,10 @@ module.exports = {
 
   entry: [
     'react-hot-loader/patch',
-    'webpack-dev-server/client?http://0.0.0.0:8080',
+    'webpack-dev-server/client?http://0.0.0.0:8000',
     'webpack/hot/only-dev-server',
+    'index.html',
+    'global.css',
     'index'
   ],
 
@@ -27,6 +29,7 @@ module.exports = {
 
   devServer: {
     host: '0.0.0.0',
+    port: 8000,
     disableHostCheck: true,
     hot: true,
     contentBase: resolve(__dirname, 'dist'),
@@ -46,7 +49,16 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader?modules']
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1
+            }
+          },
+          'postcss-loader'
+        ]
       },
       {
         test: /\.html$/,

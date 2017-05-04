@@ -1,14 +1,12 @@
 import React from 'react'
 
-import { FormGroup, FormControl, ControlLabel } from 'react-bootstrap'
-
 const Login = () => (
-  <form>
-    <FormGroup>
-      <ControlLabel>Username</ControlLabel>
-      <FormControl />
-    </FormGroup>
-  </form>
+  <div className="panel panel-default">
+    <div className="panel-heading">
+      <h3 className="panel-itle">Login</h3>
+    </div>
+    <div className="panel-body" />
+  </div>
 )
 
 export default Login

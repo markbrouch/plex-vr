@@ -3,9 +3,6 @@ import ReactDOM from 'react-dom'
 
 import { AppContainer } from 'react-hot-loader'
 
-import 'index.html'
-import 'bootstrap/dist/css/bootstrap.css'
-
 import App from 'components/App'
 
 const render = Component => {
