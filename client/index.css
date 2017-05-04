@@ -1,0 +1,9 @@
+@import 'normalize.css';
+@import 'cssrecipes-defaults';
+@import 'bootstrap';
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
