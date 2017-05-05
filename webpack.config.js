@@ -22,7 +22,13 @@ module.exports = {
 
   resolve: {
     extensions: ['.js', '.jsx'],
-    modules: ['client', 'node_modules']
+    modules: ['client', 'node_modules'],
+    alias: {
+      '~client': resolve(__dirname, 'client'),
+      '~server': resolve(__dirname, 'server'),
+      '~components': resolve(__dirname, 'client/components'),
+      '~reducers': resolve(__dirname, 'client/reducers')
+    }
   },
 
   devtool: 'inline-source-map',
