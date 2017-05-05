@@ -96,6 +96,10 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(['dist']),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin()
+    new webpack.NamedModulesPlugin(),
+    new webpack.ProvidePlugin({
+      Promise: 'imports-loader?this=>global!exports-loader?global.Promise!es6-promise',
+      fetch: 'imports-loader?this=>global!exports-loader?global.fetch!whatwg-fetch'
+    })
   ]
 }

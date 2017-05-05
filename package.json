@@ -18,6 +18,7 @@
     "aframe": "^0.5.0",
     "aframe-react": "^4.2.3",
     "bootstrap": "^3.3.7",
+    "es6-promise": "^4.1.0",
     "glamor": "^2.20.24",
     "glamorous": "^3.13.3",
     "koa": "^2.2.0",
@@ -32,7 +33,8 @@
     "redux": "^3.6.0",
     "request": "^2.81.0",
     "superagent": "^3.5.2",
-    "url-loader": "^0.5.8"
+    "url-loader": "^0.5.8",
+    "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
     "babel-core": "^6.24.1",
@@ -42,8 +44,10 @@
     "clean-webpack-plugin": "^0.1.16",
     "css-loader": "^0.28.1",
     "cssrecipes-defaults": "^0.5.0",
+    "exports-loader": "^0.6.4",
     "file-loader": "^0.11.1",
     "husky": "^0.13.3",
+    "imports-loader": "^0.7.1",
     "lint-staged": "^3.4.1",
     "normalize.css": "^7.0.0",
     "postcss-import": "^9.1.0",
