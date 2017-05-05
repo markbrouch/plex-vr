@@ -15,4 +15,15 @@ if (process.env.NODE_ENV !== 'production') {
   middleware.push(createLogger())
 }
 
-export const configureStore = initialState => createStore(rootReducer, enhancer)
+export const configureStore = initialState => {
+  const store = createStore(rootReducer, initialState, enhancer)
+
+  if (module.hot) {
+    module.hot.accept('~reducers', () => {
+      const nextRootReducer = require('~reducers')
+      store.replaceReducer(nextRootReducer)
+    })
+  }
+
+  return store
+}
