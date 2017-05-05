@@ -1,6 +1,8 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import glamorous from 'glamorous'
-import request from 'superagent'
+
+import { createLogin } from '~actions/login'
 
 const Container = glamorous.div({
   display: 'flex',
@@ -27,22 +29,12 @@ class Login extends React.Component {
   }
 
   handleSubmit(event) {
+    event.preventDefault()
+
+    const { dispatch } = this.props
     const { username, password } = this.state
 
-    const req = request
-      .post('https://plex.tv/users/sign_in.json')
-      .type('form')
-      .set({
-        'X-Plex-Client-Identifier': '12345'
-      })
-      .send({
-        'user[login]': username,
-        'user[password]': password
-      })
-
-    req.then(({ body }) => console.log(body)).catch(err => console.log(err))
-
-    event.preventDefault()
+    dispatch(createLogin({ username, password }))
   }
 
   handleInputChange(event) {
@@ -97,4 +89,4 @@ class Login extends React.Component {
   }
 }
 
-export default Login
+export default connect()(Login)
