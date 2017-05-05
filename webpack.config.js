@@ -2,12 +2,14 @@ const { resolve } = require('path')
 const webpack = require('webpack')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 
+const DEV_PORT = process.env.DEV_PORT || 8000
+
 module.exports = {
   context: resolve(__dirname, 'client'),
 
   entry: [
     'react-hot-loader/patch',
-    'webpack-dev-server/client?http://0.0.0.0:8000',
+    `webpack-dev-server/client?http://0.0.0.0:${DEV_PORT}`,
     'webpack/hot/only-dev-server',
     'index.html',
     'index.css',
@@ -36,7 +38,7 @@ module.exports = {
 
   devServer: {
     host: '0.0.0.0',
-    port: 8000,
+    port: DEV_PORT,
     disableHostCheck: true,
     hot: true,
     contentBase: resolve(__dirname, 'dist'),
