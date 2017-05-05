@@ -7,6 +7,7 @@ const req = require('request')
 const { resolve } = require('path')
 const { createReadStream } = require('fs')
 
+const PORT = process.env.PORT || 8000
 const STATIC_DIR = resolve(__dirname, '../dist')
 
 const app = new Koa()
@@ -20,4 +21,4 @@ router.get('/video', ctx => {
 
 app.use(logger()).use(router.routes()).use(serve(STATIC_DIR))
 
-app.listen(process.env.PORT || 8181)
+app.listen(PORT)

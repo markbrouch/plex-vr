@@ -2,7 +2,8 @@ const { resolve } = require('path')
 const webpack = require('webpack')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 
-const DEV_PORT = process.env.DEV_PORT || 8000
+const PORT = process.env.port || 8000
+const DEV_PORT = process.env.DEV_PORT || 8001
 
 module.exports = {
   context: resolve(__dirname, 'client'),
@@ -45,7 +46,7 @@ module.exports = {
     publicPath: '/',
     historyApiFallback: true,
     proxy: {
-      '/video': 'http://0.0.0.0:8181'
+      '/video': `http://0.0.0.0:${PORT}`
     }
   },
 
