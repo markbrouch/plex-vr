@@ -2,7 +2,7 @@ import { createAction } from 'redux-actions'
 
 import qs from 'qs'
 
-const LOGIN = 'LOGIN'
+export const LOGIN = 'LOGIN'
 
 const fetchLogin = async ({ username, password }) => {
   try {

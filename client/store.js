@@ -11,7 +11,7 @@ const composeEnhancers = typeof window === 'object' &&
 
 const middleware = [
   promiseMiddleware({
-    promiseTypeSuffixes: ['REQUEST', 'SUCCESS', 'ERROR']
+    promiseTypeSuffixes: ['REQUEST', 'SUCCESS', 'FAILURE']
   })
 ]
 if (process.env.NODE_ENV !== 'production') {

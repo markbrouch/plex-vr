@@ -2,6 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import glamorous from 'glamorous'
 
+import Linkify from 'react-linkify'
+
 import { createLogin } from '~actions/login'
 
 const Container = glamorous.div({
@@ -47,6 +49,7 @@ class Login extends React.Component {
   }
 
   render() {
+    const { error, errorMessage } = this.props
     const { username, password } = this.state
 
     return (
@@ -56,8 +59,14 @@ class Login extends React.Component {
             <h3 className="panel-itle">Login</h3>
           </div>
           <div className="panel-body">
+            {!!error &&
+              <div className="alert alert-danger" role="alert">
+                <Linkify properties={{ target: '_blank' }}>
+                  {errorMessage}
+                </Linkify>
+              </div>}
             <form onSubmit={this.handleSubmit}>
-              <div className="form-group">
+              <div className="form-group form-group-lg">
                 <label htmlFor="usernameInput">Username</label>
                 <input
                   className="form-control"
@@ -68,7 +77,7 @@ class Login extends React.Component {
                   onChange={this.handleInputChange}
                 />
               </div>
-              <div className="form-group">
+              <div className="form-group form-group-lg">
                 <label htmlFor="passwordInput">Password</label>
                 <input
                   className="form-control"
@@ -89,4 +98,7 @@ class Login extends React.Component {
   }
 }
 
-export default connect()(Login)
+export default connect(({ userStore }) => ({
+  error: userStore.error,
+  errorMessage: userStore.errorMessage
+}))(Login)
