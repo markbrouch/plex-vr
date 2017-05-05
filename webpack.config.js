@@ -27,7 +27,8 @@ module.exports = {
       '~client': resolve(__dirname, 'client'),
       '~server': resolve(__dirname, 'server'),
       '~components': resolve(__dirname, 'client/components'),
-      '~reducers': resolve(__dirname, 'client/reducers')
+      '~reducers': resolve(__dirname, 'client/reducers'),
+      '~actions': resolve(__dirname, 'client/actions')
     }
   },
 
