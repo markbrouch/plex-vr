@@ -1663,7 +1663,7 @@ diffie-hellman@^5.0.0:
     miller-rabin "^4.0.0"
     randombytes "^2.0.0"
 
-document-register-element@dmarcos/document-register-element#8ccc532b7:
+"document-register-element@github:dmarcos/document-register-element#8ccc532b7":
   version "0.5.4"
   resolved "https://codeload.github.com/dmarcos/document-register-element/tar.gz/8ccc532b7"
 
@@ -2197,7 +2197,7 @@ function-bind@^1.0.2:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/function-bind/-/function-bind-1.1.0.tgz#16176714c801798e4e8f2cf7f7529467bb4a5771"
 
-gauge@~2.7.1:
+gauge@~2.7.3:
   version "2.7.4"
   resolved "https://registry.yarnpkg.com/gauge/-/gauge-2.7.4.tgz#2c03405c7538c39d7eb37b317022e325fb018bf7"
   dependencies:
@@ -3930,12 +3930,12 @@ npm-which@^3.0.1:
     which "^1.2.10"
 
 npmlog@^4.0.2:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/npmlog/-/npmlog-4.0.2.tgz#d03950e0e78ce1527ba26d2a7592e9348ac3e75f"
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/npmlog/-/npmlog-4.1.0.tgz#dc59bee85f64f00ed424efb2af0783df25d1c0b5"
   dependencies:
     are-we-there-yet "~1.1.2"
     console-control-strings "~1.1.0"
-    gauge "~2.7.1"
+    gauge "~2.7.3"
     set-blocking "~2.0.0"
 
 num2fraction@^1.2.2:
@@ -4986,7 +4986,7 @@ redux-promise-middleware@^4.2.0:
 
 redux-thunk@^2.2.0:
   version "2.2.0"
-  resolved "http://npme.walmart.com/redux-thunk/-/redux-thunk-2.2.0.tgz#e615a16e16b47a19a515766133d1e3e99b7852e5"
+  resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-2.2.0.tgz#e615a16e16b47a19a515766133d1e3e99b7852e5"
 
 redux@^3.6.0:
   version "3.6.0"
@@ -6123,8 +6123,8 @@ webpack-sources@^0.2.3:
     source-map "~0.5.3"
 
 webpack@^2.4.1:
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/webpack/-/webpack-2.5.0.tgz#5a17089f8d0e43442e606d6cf9b2a146c8ed9911"
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/webpack/-/webpack-2.5.1.tgz#61742f0cf8af555b87460a9cd8bba2f1e3ee2fce"
   dependencies:
     acorn "^5.0.0"
     acorn-dynamic-import "^2.0.0"
@@ -6158,7 +6158,7 @@ websocket-extensions@>=0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/websocket-extensions/-/websocket-extensions-0.1.1.tgz#76899499c184b6ef754377c2dbb0cd6cb55d29e7"
 
-webvr-polyfill@dmarcos/webvr-polyfill#a02a8089b:
+"webvr-polyfill@github:dmarcos/webvr-polyfill#a02a8089b":
   version "0.9.25"
   resolved "https://codeload.github.com/dmarcos/webvr-polyfill/tar.gz/a02a8089b"
   dependencies:
