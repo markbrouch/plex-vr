@@ -1,5 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import { createLogger } from 'redux-logger'
+import thunk from 'redux-thunk'
 import promiseMiddleware from 'redux-promise-middleware'
 
 import rootReducer from '~reducers'
@@ -10,6 +11,7 @@ const composeEnhancers = typeof window === 'object' &&
   : compose
 
 const middleware = [
+  thunk,
   promiseMiddleware({
     promiseTypeSuffixes: ['REQUEST', 'SUCCESS', 'FAILURE']
   })
