@@ -4,7 +4,7 @@ import glamorous from 'glamorous'
 
 import Linkify from 'react-linkify'
 
-import { createLogin } from '~actions/login'
+import { login } from '~actions/login'
 
 const Container = glamorous.div({
   display: 'flex',
@@ -36,7 +36,7 @@ class Login extends React.Component {
     const { dispatch } = this.props
     const { username, password } = this.state
 
-    dispatch(createLogin({ username, password }))
+    dispatch(login({ username, password }))
   }
 
   handleInputChange(event) {
