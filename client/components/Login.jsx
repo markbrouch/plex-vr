@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import glamorous from 'glamorous'
+import classNames from 'classnames'
 
 import Linkify from 'react-linkify'
 
@@ -14,8 +15,8 @@ const Container = glamorous.div({
   height: '100%'
 })
 
-const Panel = glamorous.div({
-  width: '300px'
+const Card = glamorous.div({
+  width: '30rem'
 })
 
 class Login extends React.Component {
@@ -56,47 +57,56 @@ class Login extends React.Component {
     const { from } = location.state || { from: { pathname: '/' } }
     if (isAuthenticated) return <Redirect to={from} />
 
+    const formGroupClasses = classNames('form-group form-group-lg', {
+      'has-danger': error
+    })
+
     return (
       <Container>
-        <Panel className="panel panel-default">
-          <div className="panel-heading">
-            <h3 className="panel-itle">Login</h3>
+        <Card className="card">
+          <h3 className="card-header">Login</h3>
+          <div className="card-block">
+            <div className="card-text">
+              {!!error &&
+                <div className="alert alert-danger" role="alert">
+                  <Linkify properties={{ target: '_blank' }}>
+                    {errorMessage}
+                  </Linkify>
+                </div>}
+              <form onSubmit={this.handleSubmit}>
+                <div className={formGroupClasses}>
+                  <label htmlFor="usernameInput">Username</label>
+                  <input
+                    className="form-control"
+                    id="usernameInput"
+                    name="username"
+                    placeholder="Username or Email"
+                    value={username}
+                    onChange={this.handleInputChange}
+                  />
+                </div>
+                <div className={formGroupClasses}>
+                  <label htmlFor="passwordInput">Password</label>
+                  <input
+                    className="form-control"
+                    type="password"
+                    id="passwordInput"
+                    name="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={this.handleInputChange}
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="btn btn-primary btn-lg btn-block"
+                >
+                  Sign In
+                </button>
+              </form>
+            </div>
           </div>
-          <div className="panel-body">
-            {!!error &&
-              <div className="alert alert-danger" role="alert">
-                <Linkify properties={{ target: '_blank' }}>
-                  {errorMessage}
-                </Linkify>
-              </div>}
-            <form onSubmit={this.handleSubmit}>
-              <div className="form-group form-group-lg">
-                <label htmlFor="usernameInput">Username</label>
-                <input
-                  className="form-control"
-                  id="usernameInput"
-                  name="username"
-                  placeholder="Username or Email"
-                  value={username}
-                  onChange={this.handleInputChange}
-                />
-              </div>
-              <div className="form-group form-group-lg">
-                <label htmlFor="passwordInput">Password</label>
-                <input
-                  className="form-control"
-                  type="password"
-                  id="passwordInput"
-                  name="password"
-                  placeholder="Password"
-                  value={password}
-                  onChange={this.handleInputChange}
-                />
-              </div>
-              <button type="submit" className="btn btn-default">Sign In</button>
-            </form>
-          </div>
-        </Panel>
+        </Card>
       </Container>
     )
   }
