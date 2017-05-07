@@ -5,8 +5,7 @@ const initialState = {
 }
 
 const userStore = (state = initialState, action) => {
-  const { type, payload = {}, error } = action
-  const { user, error: errorMessage } = payload
+  const { type, payload: { user, error: errorMessage } = {}, error } = action
 
   switch (type) {
     case `${LOGIN}_REQUEST`:
