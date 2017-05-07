@@ -1,4 +1,4 @@
-import { SECTIONS } from '~actions/login'
+import { SECTIONS } from '~actions/sections'
 
 const initialState = {}
 
