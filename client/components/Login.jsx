@@ -6,7 +6,7 @@ import classNames from 'classnames'
 
 import Linkify from 'react-linkify'
 
-import { login } from '~actions/login'
+import { createLogin } from '~actions/login'
 
 const Container = glamorous.div({
   display: 'flex',
@@ -35,10 +35,10 @@ class Login extends React.Component {
   handleSubmit(event) {
     event.preventDefault()
 
-    const { dispatch } = this.props
+    const { onSubmit } = this.props
     const { username, password } = this.state
 
-    dispatch(login({ username, password }))
+    onSubmit({ username, password })
   }
 
   handleInputChange(event) {
@@ -117,5 +117,9 @@ export default connect(
     isAuthenticated,
     error,
     errorMessage
+  }),
+  dispatch => ({
+    onSubmit: ({ username, password }) =>
+      dispatch(createLogin({ username, password }))
   })
 )(Login)
