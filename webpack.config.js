@@ -29,6 +29,7 @@ module.exports = {
     alias: {
       '~client': resolve(__dirname, 'client'),
       '~server': resolve(__dirname, 'server'),
+      '~util': resolve(__dirname, 'client/util'),
       '~api': resolve(__dirname, 'client/api'),
       '~components': resolve(__dirname, 'client/components'),
       '~reducers': resolve(__dirname, 'client/reducers'),
