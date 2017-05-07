@@ -98,7 +98,7 @@ class Login extends React.Component {
   }
 }
 
-export default connect(({ userStore }) => ({
-  error: userStore.error,
-  errorMessage: userStore.errorMessage
+export default connect(({ userStore: { error, errorMessage } }) => ({
+  error,
+  errorMessage
 }))(Login)
