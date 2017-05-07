@@ -24,7 +24,9 @@ if (process.env.NODE_ENV !== 'production') {
 
 const enhancer = composeEnhancers(
   applyMiddleware(...middleware),
-  autoRehydrate()
+  autoRehydrate({
+    log: process.env.NODE_ENV !== 'production'
+  })
 )
 
 export const configureStore = initialState => {
