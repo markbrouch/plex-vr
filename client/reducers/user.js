@@ -1,7 +1,7 @@
 import { LOGIN } from '~actions/login'
 
 const initialState = {
-  isLoggedIn: false
+  isAuthenticated: false
 }
 
 const userStore = (state = initialState, action) => {
@@ -13,13 +13,13 @@ const userStore = (state = initialState, action) => {
 
     case `${LOGIN}_SUCCESS`:
       return {
-        isLoggedIn: true,
+        isAuthenticated: true,
         user
       }
 
     case `${LOGIN}_FAILURE`:
       return {
-        isLoggedIn: false,
+        isAuthenticated: false,
         error,
         errorMessage
       }

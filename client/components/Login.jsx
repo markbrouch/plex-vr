@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import glamorous from 'glamorous'
 
 import Linkify from 'react-linkify'
@@ -49,8 +50,15 @@ class Login extends React.Component {
   }
 
   render() {
-    const { error, errorMessage } = this.props
+    const {
+      isAuthenticated,
+      error,
+      errorMessage,
+      location: { state: { from } } = { pathname: '/' }
+    } = this.props
     const { username, password } = this.state
+
+    if (isAuthenticated) return <Redirect to={from} />
 
     return (
       <Container>
@@ -98,7 +106,10 @@ class Login extends React.Component {
   }
 }
 
-export default connect(({ userStore: { error, errorMessage } }) => ({
-  error,
-  errorMessage
-}))(Login)
+export default connect(
+  ({ userStore: { isAuthenticated, error, errorMessage } }) => ({
+    isAuthenticated,
+    error,
+    errorMessage
+  })
+)(Login)
