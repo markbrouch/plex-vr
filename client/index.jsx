@@ -10,10 +10,10 @@ import App from '~components/App'
 
 const store = configureStore()
 
-const render = Component => {
+const render = async Component => {
   ReactDOM.render(
     <AppContainer>
-      <Provider store={store}>
+      <Provider store={await store}>
         <Component />
       </Provider>
     </AppContainer>,

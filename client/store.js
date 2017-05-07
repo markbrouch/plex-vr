@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware, compose } from 'redux'
-import { persistStore, autoRehydrate } from 'redux-persist'
+import { autoRehydrate, getStoredState, createPersistor } from 'redux-persist'
 import { createLogger } from 'redux-logger'
 import thunk from 'redux-thunk'
 import promiseMiddleware from 'redux-promise-middleware'
@@ -29,10 +29,25 @@ const enhancer = composeEnhancers(
   })
 )
 
-export const configureStore = initialState => {
-  const store = createStore(rootReducer, initialState, enhancer)
+const rehydrateState = (config = {}) =>
+  new Promise((resolve, reject) => {
+    getStoredState(config, (err, restoredState) => {
+      if (err) reject(err)
+      resolve(restoredState)
+    })
+  })
 
-  persistStore(store, { storage: localForage })
+export const configureStore = async initialState => {
+  const persistConfig = { storage: localForage }
+  const restoredState = await rehydrateState(persistConfig)
+  const store = createStore(
+    rootReducer,
+    { ...restoredState, ...initialState },
+    enhancer
+  )
+
+  const persistor = createPersistor(store, persistConfig)
+  if (typeof window === 'object') window.__REDUX_PERSISTOR__ = persistor
 
   if (module.hot) {
     module.hot.accept('~reducers', () => {

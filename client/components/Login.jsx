@@ -50,14 +50,10 @@ class Login extends React.Component {
   }
 
   render() {
-    const {
-      isAuthenticated,
-      error,
-      errorMessage,
-      location: { state: { from } } = { pathname: '/' }
-    } = this.props
+    const { isAuthenticated, error, errorMessage, location } = this.props
     const { username, password } = this.state
 
+    const { from } = location.state || { from: { pathname: '/' } }
     if (isAuthenticated) return <Redirect to={from} />
 
     return (
