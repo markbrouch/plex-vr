@@ -4,4 +4,9 @@ import API from '~api'
 
 export const SECTIONS = 'SECTIONS'
 
-export const fetchSections = createAction(SECTIONS, API.fetchSections)
+export const fetchSections = () => (dispatch, getState) => {
+  const { uuid, userStore: { user: { authToken } } } = getState()
+  return dispatch(
+    createAction(SECTIONS, API.fetchSections)({ authToken, uuid })
+  )
+}
