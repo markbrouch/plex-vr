@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
+import uuid from 'uuid/v4'
 
 import { AppContainer } from 'react-hot-loader'
 
@@ -8,7 +9,9 @@ import { configureStore } from 'store'
 
 import App from '~components/App'
 
-const store = configureStore()
+const store = configureStore({
+  uuid: uuid()
+})
 
 const render = async Component => {
   ReactDOM.render(

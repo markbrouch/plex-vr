@@ -42,7 +42,7 @@ export const configureStore = async initialState => {
   const restoredState = await rehydrateState(persistConfig)
   const store = createStore(
     rootReducer,
-    { ...restoredState, ...initialState },
+    { ...initialState, ...restoredState },
     enhancer
   )
 
