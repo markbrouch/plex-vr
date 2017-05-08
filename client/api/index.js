@@ -25,6 +25,22 @@ export default {
     })
   },
 
+  async fetchResources({ uuid, authToken }) {
+    const headers = getPlexHeaders({ uuid, authToken })
+
+    const json = await requestJSON(
+      'https://plex.tv/api/resources?includeHttps=1',
+      { headers }
+    )
+
+    return {
+      resources: json.MediaContainer.Device.map(device => ({
+        ...device.$,
+        connections: device.Connection.map(connection => connection.$)
+      }))
+    }
+  },
+
   async fetchSections({ uuid, authToken }) {
     const headers = getPlexHeaders({ uuid, authToken })
 
