@@ -39,6 +39,7 @@
     "redux-promise-middleware": "^4.2.0",
     "redux-thunk": "^2.2.0",
     "request": "^2.81.0",
+    "uuid": "^3.0.1",
     "whatwg-fetch": "^2.0.3",
     "xml2js": "^0.4.17"
   },
