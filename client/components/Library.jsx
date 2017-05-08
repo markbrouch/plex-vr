@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import { fetchSections } from '~actions/sections'
+import {fetchResources} from '~actions/resources'
 
 const SectionCard = ({ title, serverName }) => (
   <div className="card">
@@ -20,10 +21,18 @@ class Library extends React.Component {
     super(props)
 
     this.handleFetchSections = this.handleFetchSections.bind(this)
+    this.handleFetchResources = this.handleFetchResources.bind(this)
+
+    this.handleFetchSections()
+    this.handleFetchResources()
   }
 
   handleFetchSections() {
     this.props.onFetchSections()
+  }
+
+  handleFetchResources() {
+    this.props.onFetchResources()
   }
 
   render() {
@@ -46,8 +55,6 @@ class Library extends React.Component {
     }
 
     if (!sections) {
-      this.handleFetchSections()
-
       return <div>Loading...</div>
     }
     return (
@@ -68,6 +75,7 @@ export default connect(
     error
   }),
   dispatch => ({
-    onFetchSections: () => dispatch(fetchSections())
+    onFetchSections: () => dispatch(fetchSections()),
+    onFetchResources: () => dispatch(fetchResources())
   })
 )(Library)
