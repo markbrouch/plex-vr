@@ -23,9 +23,7 @@ class Library extends React.Component {
   }
 
   handleFetchSections() {
-    const { authToken, onFetchSections } = this.props
-
-    onFetchSections({ authToken })
+    this.props.onFetchSections()
   }
 
   render() {
@@ -65,15 +63,11 @@ class Library extends React.Component {
 }
 
 export default connect(
-  ({
-    sectionsStore: { sections, error },
-    userStore: { user: { authToken } }
-  }) => ({
+  ({ sectionsStore: { sections, error } }) => ({
     sections,
-    error,
-    authToken
+    error
   }),
   dispatch => ({
-    onFetchSections: ({ authToken }) => dispatch(fetchSections({ authToken }))
+    onFetchSections: () => dispatch(fetchSections())
   })
 )(Library)
