@@ -1,22 +1,24 @@
-import { MEDIA_ITEMS } from '~actions/media-items'
+import { SECTION } from '~actions/sections'
 import { SET_SERVER } from '~actions/resources'
 
 const initialState = {}
 
-const browser = (state = initialState, action) => {
+const library = (state = initialState, action) => {
   const { type, payload = {}, error } = action
 
   switch (type) {
-    case `${MEDIA_ITEMS}_REQUEST`:
+    case `${SECTION}_REQUEST`:
       return state
 
-    case `${MEDIA_ITEMS}_SUCCESS`:
+    case `${SECTION}_SUCCESS`:
       return {
-        mediaItems: payload.mediaItems
+        ...state,
+        items: payload.section
       }
 
-    case `${MEDIA_ITEMS}_FAILURE`:
+    case `${SECTION}_FAILURE`:
       return {
+        ...state,
         error: payload.error,
         errorMessage: payload.errorMessage
       }
@@ -31,4 +33,4 @@ const browser = (state = initialState, action) => {
   }
 }
 
-export default browser
+export default library
