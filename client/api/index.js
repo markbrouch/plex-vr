@@ -41,34 +41,31 @@ export default {
     }
   },
 
-  async fetchSections({ uuid, authToken }) {
+  async fetchSections({ uuid, authToken, serverUri }) {
     const headers = getPlexHeaders({ uuid, authToken })
 
-    const json = await requestJSON(
-      'https://plex.tv/pms/system/library/sections',
-      { headers }
-    )
+    const json = await requestJSON(`${serverUri}/library/sections`, { headers })
 
     return {
       sections: json.MediaContainer.Directory.map(directory => directory.$)
     }
   },
 
-  async fetchMediaItems({ uuid, authToken, serverUri, path }) {
-    const headers = getPlexHeaders({ uuid, authToken })
-    headers.set(
-      PLEX_HEADERS.CONTAINER_START.name,
-      PLEX_HEADERS.CONTAINER_START.default
-    )
-    headers.set(
-      PLEX_HEADERS.CONTAINER_SIZE.name,
-      PLEX_HEADERS.CONTAINER_SIZE.default
-    )
+  async fetchSection({ uuid, authToken, serverUri, sectionId }) {
+    const headers = getPlexHeaders({
+      uuid,
+      authToken,
+      containerStart: 0,
+      containerSize: 50
+    })
 
-    const json = await requestJSON(`${serverUri}${path}/all`, { headers })
+    const json = await requestJSON(
+      `${serverUri}/library/sections/${sectionId}/all`,
+      { headers }
+    )
 
     return {
-      mediaItems: json.MediaContainer.Video.map(video => video.$)
+      section: json.MediaContainer.Video.map(video => video.$)
     }
   }
 }
