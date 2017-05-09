@@ -1,11 +1,10 @@
+import qs from 'qs'
 import React from 'react'
 import { connect } from 'react-redux'
-import { Route, Link } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 
-import { fetchSections } from '~actions/sections'
+import { fetchSections, fetchSection } from '~actions/sections'
 import { fetchResources } from '~actions/resources'
-
-import Browser from '~components/browser'
 
 const SectionCard = ({ title, serverName }) => (
   <div className="card">
@@ -29,67 +28,110 @@ class Library extends React.Component {
   constructor(props) {
     super(props)
 
-    this.handleFetchSections = this.handleFetchSections.bind(this)
-    this.handleFetchResources = this.handleFetchResources.bind(this)
+    const { history, serverId, resources = [] } = props
+    this.state = {
+      server: resources.find(resource => resource.clientIdentifier === serverId)
+    }
 
-    this.handleFetchSections()
-    this.handleFetchResources()
+    this.handleFetchSections = this.handleFetchSections.bind(this)
+
+    if (this.state.server) this.handleFetchSections()
   }
 
   handleFetchSections() {
     this.props.onFetchSections()
   }
 
-  handleFetchResources() {
-    this.props.onFetchResources()
+  handleFetchSection({ sectionId, sectionName }) {
+    this.setState({ sectionName })
+    this.props.onFetchSection({ sectionId })
   }
 
   render() {
-    const { sections, error } = this.props
-    const DISPLAY_TYPES = ['movie', 'show']
+    const { sections, items, authToken } = this.props
+    const { location, server, sectionName } = this.state
+    const serverUri =
+      server &&
+      server.connections.find(connection => connection.local === '0').uri
 
-    if (error) {
+    if (!server) {
       return (
-        <div className="alert alert-danger">
-          Error - could not load Sections.
-          <button
-            type="button"
-            className="btn btn-link"
-            onClick={this.handleFetchSections}
-          >
-            Try again
-          </button>
-        </div>
+        <Redirect
+          to={{
+            pathname: '/servers',
+            state: { from: location }
+          }}
+        />
       )
     }
 
-    if (!sections) {
-      return <div>Loading...</div>
-    }
     return (
-      <div className="row">
-        <div className="col-md-3">
-          {sections
-            .filter(({ type }) => DISPLAY_TYPES.includes(type))
-            .map(({ uuid, title, serverName }) => (
-              <SectionCard key={uuid} title={title} serverName={serverName} />
-            ))}
-        </div>
-        <div className="col-md-9">
-          <Route path="/library/:server/:section" component={Browser} />
-        </div>
+      <div>
+        <nav className="breadcrumb">
+          <Link to="/servers" className="breadcrumb-item">{server.name}</Link>
+          {!!sectionName && <a className="breadcrumb-item">{sectionName}</a>}
+        </nav>
+        {!sections
+          ? <div>Loading...</div>
+          : <div className="d-flex">
+              <nav className="nav flex-column">
+                {sections
+                  .filter(section => section.type === 'movie')
+                  .map(section => (
+                    <a
+                      href="#"
+                      onClick={event => {
+                        event.preventDefault()
+                        this.handleFetchSection({
+                          sectionId: section.key,
+                          sectionName: section.title
+                        })
+                      }}
+                      className="nav-link"
+                      key={section.uuid}
+                    >
+                      {section.title}
+                    </a>
+                  ))}
+              </nav>
+              <div>
+                {items.map(item => {
+                  const params = qs.stringify({
+                    width: 128,
+                    height: 92,
+                    minSize: 1,
+                    url: item.thumb,
+                    'X-Plex-Token': authToken
+                  })
+                  return (
+                    <img
+                      key={item.ratingKey}
+                      src={`${serverUri}/photo/:/transcode?${params}`}
+                    />
+                  )
+                })}
+              </div>
+            </div>}
       </div>
     )
   }
 }
 
 export default connect(
-  ({ sectionsStore: { sections, error } }) => ({
-    sections,
-    error
+  ({
+    library: { server: serverId, items = [] },
+    userStore: { user: { authToken } },
+    resourcesStore: { resources },
+    sectionsStore: { sections }
+  }) => ({
+    authToken,
+    serverId,
+    items,
+    resources,
+    sections
   }),
   dispatch => ({
     onFetchSections: () => dispatch(fetchSections()),
-    onFetchResources: () => dispatch(fetchResources())
+    onFetchSection: ({ sectionId }) => dispatch(fetchSection({ sectionId }))
   })
 )(Library)
