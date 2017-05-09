@@ -17,7 +17,7 @@ const App = ({ isAuthenticated }) => (
       <Route path="/login" component={Login} />
       <PrivateRoute
         isAuthenticated={isAuthenticated}
-        path="/library"
+        path="/library/:server?/:section?"
         component={Library}
       />
       <PrivateRoute

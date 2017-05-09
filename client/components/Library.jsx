@@ -1,17 +1,26 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Route, Link } from 'react-router-dom'
 
 import { fetchSections } from '~actions/sections'
-import {fetchResources} from '~actions/resources'
+import { fetchResources } from '~actions/resources'
+
+import Browser from '~components/browser'
 
 const SectionCard = ({ title, serverName }) => (
   <div className="card">
     <div className="card-block">
       <h4 className="card-title">{title}</h4>
-      <dl className="card-text row">
-        <dt className="col-sm-3">Server</dt>
-        <dd className="col-sm-9">{serverName}</dd>
-      </dl>
+      <div className="card-text">
+        <h5>{serverName}</h5>
+        <Link
+          to={`/library/${serverName}/${title}`}
+          className="btn btn-primary"
+          role="button"
+        >
+          Browse
+        </Link>
+      </div>
     </div>
   </div>
 )
@@ -58,12 +67,17 @@ class Library extends React.Component {
       return <div>Loading...</div>
     }
     return (
-      <div>
-        {sections
-          .filter(({ type }) => DISPLAY_TYPES.includes(type))
-          .map(({ uuid, title, serverName }) => (
-            <SectionCard key={uuid} title={title} serverName={serverName} />
-          ))}
+      <div className="row">
+        <div className="col-md-3">
+          {sections
+            .filter(({ type }) => DISPLAY_TYPES.includes(type))
+            .map(({ uuid, title, serverName }) => (
+              <SectionCard key={uuid} title={title} serverName={serverName} />
+            ))}
+        </div>
+        <div className="col-md-9">
+          <Route path="/library/:server/:section" component={Browser} />
+        </div>
       </div>
     )
   }
