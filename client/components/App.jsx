@@ -6,6 +6,7 @@ import glamorous from 'glamorous'
 import { PrivateRoute } from '~client/routes'
 
 import Login from '~components/login'
+import Servers from '~components/servers'
 import Library from '~components/library'
 import Theater from '~components/theater'
 
@@ -15,6 +16,11 @@ const App = ({ isAuthenticated }) => (
   <Router>
     <Div width="100%" height="100%">
       <Route path="/login" component={Login} />
+      <PrivateRoute
+        isAuthenticated={isAuthenticated}
+        path="/servers"
+        component={Servers}
+      />
       <PrivateRoute
         isAuthenticated={isAuthenticated}
         path="/library/:server?/:section?"
