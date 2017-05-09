@@ -1,23 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import glamorous from 'glamorous'
 import classNames from 'classnames'
 
 import Linkify from 'react-linkify'
 
 import { createLogin } from '~actions/login'
 
-const Container = glamorous.div({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  height: '100%'
-})
-
-const Card = glamorous.div({
-  width: '30rem'
-})
+import Container from '~components/Container'
 
 class Login extends React.Component {
   constructor(props) {
@@ -63,7 +53,7 @@ class Login extends React.Component {
 
     return (
       <Container>
-        <Card className="card">
+        <div className="card">
           <h3 className="card-header">Login</h3>
           <div className="card-block">
             <div className="card-text">
@@ -106,7 +96,7 @@ class Login extends React.Component {
               </form>
             </div>
           </div>
-        </Card>
+        </div>
       </Container>
     )
   }
