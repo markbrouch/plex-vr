@@ -3,7 +3,7 @@ import UAParser from 'ua-parser-js'
 import uuid from 'uuid/v4'
 
 import { requestJSON } from '~api/request'
-import getPlexHeaders from '~api/headers'
+import getPlexHeaders, { PLEX_HEADERS } from '~api/headers'
 
 export default {
   async createLogin({ username, password, uuid }) {
@@ -51,6 +51,24 @@ export default {
 
     return {
       sections: json.MediaContainer.Directory.map(directory => directory.$)
+    }
+  },
+
+  async fetchMediaItems({ uuid, authToken, serverUri, path }) {
+    const headers = getPlexHeaders({ uuid, authToken })
+    headers.set(
+      PLEX_HEADERS.CONTAINER_START.name,
+      PLEX_HEADERS.CONTAINER_START.default
+    )
+    headers.set(
+      PLEX_HEADERS.CONTAINER_SIZE.name,
+      PLEX_HEADERS.CONTAINER_SIZE.default
+    )
+
+    const json = await requestJSON(`${serverUri}${path}/all`, { headers })
+
+    return {
+      mediaItems: json.MediaContainer.Video.map(video => video.$)
     }
   }
 }
