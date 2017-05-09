@@ -47,6 +47,14 @@ export const PLEX_HEADERS = {
   TOKEN: {
     name: 'X-Plex-Token',
     default: ''
+  },
+  CONTAINER_START: {
+    name: 'X-Plex-Container-Start',
+    default: 0
+  },
+  CONTAINER_SIZE: {
+    name: 'X-Plex-Container-Size',
+    default: 50
   }
 }
 
