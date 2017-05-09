@@ -96,8 +96,9 @@ export const getPlexHeaders = ({
   if (uuid) plexHeaders.set(PLEX_HEADERS.CLIENT_IDENTIFIER.name, uuid)
   if (authToken) plexHeaders.set(PLEX_HEADERS.TOKEN.name, authToken)
   if (containerStart)
-    plexHeaders.set(PLEX_HEADERS.CONTAINER_START, containerStart)
-  if (containerSize) plexHeaders.set(PLEX_HEADERS.CONTAINER_SIZE, containerSize)
+    plexHeaders.set(PLEX_HEADERS.CONTAINER_START.name, containerStart)
+  if (containerSize)
+    plexHeaders.set(PLEX_HEADERS.CONTAINER_SIZE.name, containerSize)
 
   return plexHeaders
 }
