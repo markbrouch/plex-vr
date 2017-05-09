@@ -1,13 +1,10 @@
 import { MEDIA_ITEMS } from '~actions/media-items'
+import { SET_SERVER } from '~actions/resources'
 
 const initialState = {}
 
 const browser = (state = initialState, action) => {
-  const {
-    type,
-    payload: { mediaItems, error: errorMessage } = {},
-    error
-  } = action
+  const { type, payload = {}, error } = action
 
   switch (type) {
     case `${MEDIA_ITEMS}_REQUEST`:
@@ -15,13 +12,18 @@ const browser = (state = initialState, action) => {
 
     case `${MEDIA_ITEMS}_SUCCESS`:
       return {
-        mediaItems
+        mediaItems: payload.mediaItems
       }
 
     case `${MEDIA_ITEMS}_FAILURE`:
       return {
-        error,
-        errorMessage
+        error: payload.error,
+        errorMessage: payload.errorMessage
+      }
+
+    case SET_SERVER:
+      return {
+        server: payload
       }
 
     default:

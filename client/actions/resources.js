@@ -10,3 +10,7 @@ export const fetchResources = () => (dispatch, getState) => {
     createAction(RESOURCES, API.fetchResources)({ authToken, uuid })
   )
 }
+
+export const SET_SERVER = 'SET_SERVER'
+
+export const setServer = createAction(SET_SERVER)
