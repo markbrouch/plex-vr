@@ -16,11 +16,11 @@ export const requestJSON = async (url, options) => {
     }
 
     const contentType = response.headers.get('Content-Type')
-    if (contentType.includes('application/json')) {
+    if (contentType.includes('json')) {
       return response.json()
     }
 
-    if (contentType.includes('application/xml')) {
+    if (contentType.includes('xml')) {
       const xml = await response.text()
       return xml2json(xml)
     }
