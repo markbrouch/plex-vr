@@ -20,7 +20,10 @@ class Servers extends React.Component {
   }
 
   handleSetServer(serverId) {
-    this.props.onSetServer(serverId)
+    const { onSetServer, history } = this.props
+
+    onSetServer(serverId)
+    history.push('/library')
   }
 
   render() {
