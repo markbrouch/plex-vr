@@ -58,7 +58,12 @@ export const PLEX_HEADERS = {
   }
 }
 
-export const getPlexHeaders = ({ uuid, authToken }) => {
+export const getPlexHeaders = ({
+  uuid,
+  authToken,
+  containerStart,
+  containerSize
+}) => {
   const plexHeaders = new Headers({
     [PLEX_HEADERS.PROVIDES.name]: PLEX_HEADERS.PROVIDES.default,
     [PLEX_HEADERS.PRODUCT.name]: PLEX_HEADERS.PRODUCT.default,
@@ -90,6 +95,9 @@ export const getPlexHeaders = ({ uuid, authToken }) => {
 
   if (uuid) plexHeaders.set(PLEX_HEADERS.CLIENT_IDENTIFIER.name, uuid)
   if (authToken) plexHeaders.set(PLEX_HEADERS.TOKEN.name, authToken)
+  if (containerStart)
+    plexHeaders.set(PLEX_HEADERS.CONTAINER_START, containerStart)
+  if (containerSize) plexHeaders.set(PLEX_HEADERS.CONTAINER_SIZE, containerSize)
 
   return plexHeaders
 }
