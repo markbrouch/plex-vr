@@ -29,7 +29,7 @@ class Browser extends React.Component {
   }
 
   render() {
-    const {mediaItems} = this.props
+    const { mediaItems } = this.props
 
     if (!mediaItems) {
       return <div>Loading...</div>
@@ -37,19 +37,24 @@ class Browser extends React.Component {
 
     return (
       <div>
-        {mediaItems.map(({title, key})=>(<div key={key}>{title}</div>))}
+        {mediaItems.map(({ title, key }) => <div key={key}>{title}</div>)}
       </div>
     )
   }
 }
 
 export default connect(
-  ({ resourcesStore: { resources }, sectionsStore: { sections }, browser: {mediaItems} }) => ({
+  ({
+    resourcesStore: { resources },
+    sectionsStore: { sections },
+    browser: { mediaItems }
+  }) => ({
     resources,
     sections,
     mediaItems
   }),
   dispatch => ({
-    onFetchContent: ({ serverUri, path }) => dispatch(fetchMediaItems({ serverUri, path }))
+    onFetchContent: ({ serverUri, path }) =>
+      dispatch(fetchMediaItems({ serverUri, path }))
   })
 )(Browser)

@@ -68,7 +68,7 @@
     "webpack-dev-server": "^2.4.5"
   },
   "lint-staged": {
-    "*.js": [
+    "*.{js,jsx}": [
       "prettier --single-quote true --semi false --write",
       "git add"
     ]
