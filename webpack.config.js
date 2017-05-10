@@ -31,6 +31,7 @@ module.exports = {
       '~server': resolve(__dirname, 'src/server'),
       '~util': resolve(__dirname, 'src/util'),
       '~api': resolve(__dirname, 'src/api'),
+      '~assets': resolve(__dirname, 'src/client/assets'),
       '~components': resolve(__dirname, 'src/client/components'),
       '~reducers': resolve(__dirname, 'src/client/reducers'),
       '~actions': resolve(__dirname, 'src/client/actions')
@@ -73,7 +74,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.html$/,
+        test: /\.(html|jpg)$/,
         use: 'file-loader?name=[path][name].[ext]'
       },
       {
