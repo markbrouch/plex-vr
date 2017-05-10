@@ -6,6 +6,7 @@ const serve = require('koa-static')
 const req = require('request')
 const { resolve } = require('path')
 const { createReadStream } = require('fs')
+const qs = require('qs')
 
 const logger = koaBunyanLogger.bunyan.createLogger({
   name: 'server'
@@ -18,9 +19,11 @@ const app = new Koa()
 const router = new Router()
 
 router.get('/transcode', ctx => {
-  const { 'x-remote-server': plexServer, ...headers } = ctx.request.headers
+  const { 'x-remote-server': plexServer, ...query } = ctx.request.query
 
-  ctx.body = plexServer
+  ctx.body = req(
+    `${plexServer}/video/:/transcode/universal/start?${qs.stringify(query)}`
+  )
 })
 
 app
