@@ -48,7 +48,7 @@ module.exports = {
     publicPath: '/',
     historyApiFallback: true,
     proxy: {
-      '/transpile': `http://0.0.0.0:${PORT}`
+      '/transcode': `http://0.0.0.0:${PORT}`
     }
   },
 
