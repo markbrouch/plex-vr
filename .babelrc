@@ -3,7 +3,12 @@
     "es2015"
   ],
   "plugins": [
-    "webpack-alias",
+    [
+      "webpack-alias",
+      {
+        "noOutputExtension": true
+      }
+    ],
     "transform-object-rest-spread"
   ]
 }
