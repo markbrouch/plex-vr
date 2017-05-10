@@ -19,7 +19,7 @@ const app = new Koa()
 const router = new Router()
 
 router.get('/transcode', ctx => {
-  const { 'x-remote-server': plexServer, ...query } = ctx.request.query
+  const { remoteServer: plexServer, ...query } = ctx.request.query
 
   ctx.body = req(
     `${plexServer}/video/:/transcode/universal/start?${qs.stringify(query)}`
