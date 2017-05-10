@@ -1,14 +1,10 @@
 {
   "presets": [
-    [
-      "es2015",
-      {
-        "modules": false
-      }
-    ],
+    "es2015",
     "react"
   ],
   "plugins": [
+    "webpack-alias",
     "react-hot-loader/babel",
     "transform-object-rest-spread"
   ]

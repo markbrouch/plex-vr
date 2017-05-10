@@ -13,10 +13,10 @@ const STATIC_DIR = resolve(__dirname, '../dist')
 const app = new Koa()
 const router = new Router()
 
-router.get('/video', ctx => {
-  ctx.body = req(
-    'https://download.blender.org/durian/movies/Sintel.2010.720p.mkv'
-  )
+router.get('/transcode', ctx => {
+  const { 'plex-server': plexServer, ...headers } = ctx.request.headers
+
+  ctx.body = plexServer
 })
 
 app.use(logger()).use(router.routes()).use(serve(STATIC_DIR))

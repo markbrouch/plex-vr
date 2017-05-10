@@ -6,7 +6,7 @@ const PORT = process.env.port || 8000
 const DEV_PORT = process.env.DEV_PORT || 8001
 
 module.exports = {
-  context: resolve(__dirname, 'client'),
+  context: resolve(__dirname, 'src/client'),
 
   entry: [
     'react-hot-loader/patch',
@@ -18,22 +18,22 @@ module.exports = {
   ],
 
   output: {
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     path: resolve(__dirname, 'dist'),
     publicPath: '/'
   },
 
   resolve: {
     extensions: ['.js', '.jsx'],
-    modules: ['client', 'node_modules'],
+    modules: ['src/client', 'node_modules'],
     alias: {
-      '~client': resolve(__dirname, 'client'),
-      '~server': resolve(__dirname, 'server'),
-      '~util': resolve(__dirname, 'client/util'),
-      '~api': resolve(__dirname, 'client/api'),
-      '~components': resolve(__dirname, 'client/components'),
-      '~reducers': resolve(__dirname, 'client/reducers'),
-      '~actions': resolve(__dirname, 'client/actions')
+      '~client': resolve(__dirname, 'src/client'),
+      '~server': resolve(__dirname, 'src/server'),
+      '~util': resolve(__dirname, 'src/util'),
+      '~api': resolve(__dirname, 'src/api'),
+      '~components': resolve(__dirname, 'src/client/components'),
+      '~reducers': resolve(__dirname, 'src/client/reducers'),
+      '~actions': resolve(__dirname, 'src/client/actions')
     }
   },
 
@@ -48,7 +48,7 @@ module.exports = {
     publicPath: '/',
     historyApiFallback: true,
     proxy: {
-      '/video': `http://0.0.0.0:${PORT}`
+      '/transpile': `http://0.0.0.0:${PORT}`
     }
   },
 
@@ -75,10 +75,6 @@ module.exports = {
       {
         test: /\.html$/,
         use: 'file-loader?name=[path][name].[ext]'
-      },
-      {
-        test: /\.(mov|mkv)$/,
-        use: 'file-loader?name=video/[path][name].[ext]'
       },
       {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,

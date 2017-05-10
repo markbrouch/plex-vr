@@ -5,7 +5,7 @@ import uuid from 'uuid/v4'
 
 import { AppContainer } from 'react-hot-loader'
 
-import { configureStore } from 'store'
+import { configureStore } from '~client/store'
 
 import App from '~components/App'
 
