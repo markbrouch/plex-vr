@@ -14,7 +14,7 @@
     "transpile": "npm run clean-lib && babel src --out-dir lib --copy-files",
     "build": "webpack --progress --colors && npm run transpile",
     "hot": "webpack-dev-server",
-    "server": "transpile && node ./lib/server",
+    "server": "npm run transpile && node ./lib/server",
     "start": "npm run build && npm run server",
     "precommit": "lint-staged",
     "prepublish": "npm run build"
