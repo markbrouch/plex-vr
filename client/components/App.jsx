@@ -23,12 +23,12 @@ const App = ({ isAuthenticated }) => (
       />
       <PrivateRoute
         isAuthenticated={isAuthenticated}
-        path="/library/:server?/:section?"
+        path="/library"
         component={Library}
       />
       <PrivateRoute
         isAuthenticated={isAuthenticated}
-        path="/theater"
+        path="/theater/:id"
         component={Theater}
       />
     </Div>
