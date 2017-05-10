@@ -1,6 +1,6 @@
 {
   "name": "plex-vr",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Virtual Reality client for Plex Media Server",
   "main": "lib/index.js",
   "repository": "https://github.com/markbrouch/plex-vr.git",
