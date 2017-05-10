@@ -46,7 +46,8 @@ const Theater = ({
     'X-Plex-Device': 'OSX',
     'X-Plex-Device-Name': 'Plex VR (Chrome)',
     // 'X-Plex-Device-Screen-Resolution':'1238x791,2560x1440',
-    'X-Plex-Token': authToken
+    'X-Plex-Token': authToken,
+    'x-remote-server': serverUri
   })
 
   return (
@@ -56,7 +57,7 @@ const Theater = ({
           id="sample"
           autoPlay
           loop="true"
-          src={`${serverUri}/video/:/transcode/universal/start?${params}`}
+          src={`/transcode?${params}`}
           playsInline
         />
       </a-assets>
