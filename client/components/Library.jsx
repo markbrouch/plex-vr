@@ -6,24 +6,6 @@ import { Redirect, Link } from 'react-router-dom'
 import { fetchSections, fetchSection } from '~actions/sections'
 import { fetchResources } from '~actions/resources'
 
-const SectionCard = ({ title, serverName }) => (
-  <div className="card">
-    <div className="card-block">
-      <h4 className="card-title">{title}</h4>
-      <div className="card-text">
-        <h5>{serverName}</h5>
-        <Link
-          to={`/library/${serverName}/${title}`}
-          className="btn btn-primary"
-          role="button"
-        >
-          Browse
-        </Link>
-      </div>
-    </div>
-  </div>
-)
-
 class Library extends React.Component {
   constructor(props) {
     super(props)
@@ -34,6 +16,8 @@ class Library extends React.Component {
     }
 
     this.handleFetchSections = this.handleFetchSections.bind(this)
+    this.handleFetchSection = this.handleFetchSection.bind(this)
+    this.handleClickItem = this.handleClickItem.bind(this)
 
     if (this.state.server) this.handleFetchSections()
   }
@@ -45,6 +29,10 @@ class Library extends React.Component {
   handleFetchSection({ sectionId, sectionName }) {
     this.setState({ sectionName })
     this.props.onFetchSection({ sectionId })
+  }
+
+  handleClickItem({ itemId }) {
+    this.props.history.push(`/theater/${itemId}`)
   }
 
   render() {
@@ -107,6 +95,8 @@ class Library extends React.Component {
                     <img
                       key={item.ratingKey}
                       src={`${serverUri}/photo/:/transcode?${params}`}
+                      onClick={() =>
+                        this.handleClickItem({ itemId: item.ratingKey })}
                     />
                   )
                 })}
