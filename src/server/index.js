@@ -1,12 +1,12 @@
-const Koa = require('koa')
-const koaBunyanLogger = require('koa-bunyan-logger')
-const Router = require('koa-router')
-const serve = require('koa-static')
+import Koa from 'koa'
+import koaBunyanLogger from 'koa-bunyan-logger'
+import Router from 'koa-router'
+import serve from 'koa-static'
 
-const req = require('request')
-const { resolve } = require('path')
-const { createReadStream } = require('fs')
-const qs = require('qs')
+import req from 'request'
+import { resolve } from 'path'
+import { createReadStream } from 'fs'
+import qs from 'qs'
 
 const logger = koaBunyanLogger.bunyan.createLogger({
   name: 'server'
