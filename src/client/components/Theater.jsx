@@ -5,6 +5,9 @@ import qs from 'qs'
 import 'aframe'
 import { Entity, Scene } from 'aframe-react'
 
+import sky from '~assets/sky.jpg'
+import carpet from '~assets/carpet.jpg'
+
 const Theater = ({
   match: { params: { id } },
   uuid,
@@ -47,7 +50,7 @@ const Theater = ({
     'X-Plex-Device-Name': 'Plex VR (Chrome)',
     // 'X-Plex-Device-Screen-Resolution':'1238x791,2560x1440',
     'X-Plex-Token': authToken,
-    'x-remote-server': serverUri
+    remoteServer: serverUri
   })
 
   return (
@@ -60,13 +63,24 @@ const Theater = ({
           src={`/transcode?${params}`}
           playsInline
         />
+        <img id="sky" src={sky} />
+        <img id="carpet" src={carpet} />
       </a-assets>
+      <Entity
+        primitive="a-plane"
+        rotation="-90 0 0"
+        src="#carpet"
+        width="10000"
+        height="10000"
+        repeat="5000 5000"
+      />
+      <Entity primitive="a-sky" src="#sky" />
       <Entity
         primitive="a-video"
         src="#sample"
-        width="16"
-        height="9"
-        position="0 0 -10"
+        width="22"
+        height="12.375"
+        position="0 6.1875 -10"
       />
     </Scene>
   )
