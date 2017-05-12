@@ -30,6 +30,7 @@
     "glamorous": "^3.13.3",
     "koa": "^2.2.0",
     "koa-bunyan-logger": "^2.0.0",
+    "koa-rewrite": "^2.1.0",
     "koa-router": "next",
     "koa-static": "^3.0.0",
     "localforage": "^1.5.0",
