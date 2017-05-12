@@ -8,17 +8,20 @@ const DEV_PORT = process.env.DEV_PORT || 8001
 module.exports = {
   context: resolve(__dirname, 'src/client'),
 
-  entry: [
-    'react-hot-loader/patch',
-    `webpack-dev-server/client?http://0.0.0.0:${DEV_PORT}`,
-    'webpack/hot/only-dev-server',
-    'index.html',
-    'index.css',
-    'index'
-  ],
+  entry: {
+    aframe: 'aframe',
+    main: [
+      'react-hot-loader/patch',
+      `webpack-dev-server/client?http://0.0.0.0:${DEV_PORT}`,
+      'webpack/hot/only-dev-server',
+      'index.html',
+      'index.css',
+      'index'
+    ]
+  },
 
   output: {
-    filename: '[name].bundle.js',
+    filename: 'js/[name].bundle.js',
     path: resolve(__dirname, 'dist'),
     publicPath: '/'
   },
