@@ -11,6 +11,7 @@ module.exports = {
   entry: {
     aframe: 'aframe',
     main: [
+      'babel-polyfill',
       'react-hot-loader/patch',
       `webpack-dev-server/client?http://0.0.0.0:${DEV_PORT}`,
       'webpack/hot/only-dev-server',
