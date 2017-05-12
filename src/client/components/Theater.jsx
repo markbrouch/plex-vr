@@ -87,6 +87,7 @@ class Theater extends React.Component {
           width="22"
           height="12.375"
           position="0 6.1875 -10"
+          autoPlay={false}
           {...{ 'cursor-listener': true }}
           events={{ click: () => this._video.play() }}
         />

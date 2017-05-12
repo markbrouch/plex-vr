@@ -1,6 +1,7 @@
 import Koa from 'koa'
 import koaBunyanLogger from 'koa-bunyan-logger'
 import Router from 'koa-router'
+import rewrite from 'koa-rewrite'
 import serve from 'koa-static'
 
 import req from 'request'
@@ -13,7 +14,7 @@ const logger = koaBunyanLogger.bunyan.createLogger({
 })
 
 const PORT = process.env.PORT || 8000
-const STATIC_DIR = resolve(__dirname, '../dist')
+const STATIC_DIR = resolve(__dirname, '../../dist')
 
 const app = new Koa()
 const router = new Router()
@@ -31,6 +32,13 @@ app
   .use(koaBunyanLogger.requestIdContext())
   .use(koaBunyanLogger.requestLogger())
   .use(router.routes())
+  .use(async (ctx, next) => {
+    ctx.request.url = ctx.request.url.replace(
+      /^\/(library|login|theater|servers)(\/.*)*/,
+      '/'
+    )
+    await next()
+  })
   .use(serve(STATIC_DIR))
 
 app.listen(PORT)
