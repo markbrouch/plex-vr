@@ -10,6 +10,17 @@ import carpet from '~assets/carpet.jpg'
 class Theater extends React.Component {
   constructor(props) {
     super(props)
+
+    this.handlePlayPause = this.handlePlayPause.bind(this)
+  }
+
+  handlePlayPause() {
+    if (this._video.paused) {
+      this._video.play()
+    } else {
+      this._video.pause()
+    }
+    console.log(this._video.paused)
   }
 
   render() {
@@ -63,9 +74,10 @@ class Theater extends React.Component {
       <Scene stats>
         <a-assets>
           <video
-            id="sample"
+            id="movie"
             src={`/transcode?${params}`}
             playsInline
+            autoPlay={false}
             ref={c => (this._video = c)}
           />
           <img id="sky" src={sky} />
@@ -82,14 +94,11 @@ class Theater extends React.Component {
         />
         <Entity primitive="a-sky" src="#sky" />
         <Entity
-          primitive="a-video"
-          src="#sample"
-          width="22"
-          height="12.375"
-          position="0 6.1875 -10"
-          autoPlay={false}
-          {...{ 'cursor-listener': true }}
-          events={{ click: () => this._video.play() }}
+          geometry="primitive: cylinder; openEnded: true; height: 12.375; radius: 14; thetaLength: 90; thetaStart: 135"
+          material="side: double; src: #movie; width: 1280; height: 720"
+          position="0 6.1875 0"
+          scale="-1 1 1"
+          events={{ click: this.handlePlayPause, touch: this.handlePlayPause }}
         />
       </Scene>
     )
